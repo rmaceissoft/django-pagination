@@ -106,16 +106,16 @@ class AutoPaginateNode(template.Node):
             if INVALID_PAGE_RAISES_404:
                 raise Http404('Invalid page requested.  If DEBUG were set to ' +
                     'False, an HTTP 404 page would have been shown instead.')
-            context[key] = []
-            context['invalid_page'] = True
+            context.dicts[0][key] = []
+            context.dicts[0]['invalid_page'] = True
             return u''
         if self.context_var is not None:
-            context[self.context_var] = page_obj.object_list
+            context.dicts[0][self.context_var] = page_obj.object_list
         else:
-            context[key] = page_obj.object_list
-        context['paginator'] = paginator
-        context['page_obj'] = page_obj
-        context['page_suffix'] = page_suffix
+            context.dicts[0][key] = page_obj.object_list
+        context.dicts[0]['paginator'] = paginator
+        context.dicts[0]['page_obj'] = page_obj
+        context.dicts[0]['page_suffix'] = page_suffix
         return u''
 
 
